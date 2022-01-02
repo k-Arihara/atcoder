@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+
+in_*.txt
+out_*.txt
+main.cpp.*
+metadata.json

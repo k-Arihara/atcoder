@@ -1,0 +1,10 @@
+[codestyle]
+indent_type = 'space'
+indent_width = 2
+workspace_dir = '~/projects/atcoder/workspace'
+lang = 'cpp'
+template_file='~/projects/atcoder/my_template.cpp'
+[etc]
+download_without_login=false
+parallel_download=false
+save_no_session_cache=false
