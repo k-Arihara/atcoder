@@ -35,3 +35,5 @@ in_*.txt
 out_*.txt
 main.cpp.*
 metadata.json
+
+workspace/

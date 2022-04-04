@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 
 // 総数を1000000007（素数）で割った余り
@@ -37,21 +38,43 @@ using pll = pair<ll, ll>;
 ull gcd(ull a, ull b) { return b ? gcd(b, a % b) : a; }
 ull lcm(ull a, ull b) { return a / gcd(a, b) * b; }
 
-const long long MOD = 2;
+double subfunc(ll N, int visited[], vector<ll> x, vector<ll> y){
+  double distance = 0;
+  rep(i, 1, N) {
+    int src = visited[i - 1] - 1;
+    int dst = visited[i] - 1;
+    double d =
+        sqrt(pow(x[src] - x[dst], 2) + pow(y[src] - y[dst], 2));
+    // printf("%f\n", d);
+    distance += d;
+  }
+  return distance;
+}
 
-void func(long long p, std::vector<long long> a){
+void func(long long N, std::vector<long long> x, std::vector<long long> y){
+  int visited[N];
+  int count = 0;
+  double sum = 0;
 
+  rep(i, 0, N) visited[i] = i + 1;
+  do {
+    count++;
+    sum += subfunc(N, visited, x, y);
+  } while (next_permutation(visited, visited + N));
+  printf("%f\n", sum / count);
 }
 
 int main(){
   // cout << fixed << setprecision(5);
 
-  long long p;
-  std::scanf("%lld", &p);
-  std::vector<long long> a(p);
-  for(int i = 0 ; i < p ; i++){
-    std::scanf("%lld", &a[i]);
+  long long N;
+  std::scanf("%lld", &N);
+  std::vector<long long> x(N);
+  std::vector<long long> y(N);
+  for(int i = 0 ; i < N ; i++){
+    std::scanf("%lld", &x[i]);
+    std::scanf("%lld", &y[i]);
   }
-  func(p, std::move(a));
+  func(N, std::move(x), std::move(y));
   return 0;
 }

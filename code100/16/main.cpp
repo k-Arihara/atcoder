@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 
 // 総数を1000000007（素数）で割った余り
@@ -38,8 +39,36 @@ ull gcd(ull a, ull b) { return b ? gcd(b, a % b) : a; }
 ull lcm(ull a, ull b) { return a / gcd(a, b) * b; }
 
 
-void func(long long N, long long M, long long P, std::vector<long long> A, std::vector<long long> B, std::vector<long long> C){
+void func(long long N, std::vector<long long> P, std::vector<long long> Q){
+  int array[N];
+  int p = -1, q = -1;
+  int num = 0;
+  rep(i, 0, N) array[i] = i + 1;
+  do{
+    num++;
+    if (p == -1) {
+      int count = 0;
+      rep(i, 0, N){
+        if(array[i] != P[i]) break;
+        else
+          count++;
+      }
+      if(count == N)
+        p = num;
+    }
 
+    if (q == -1) {
+      int count = 0;
+      rep(i, 0, N){
+        if(array[i] != Q[i]) break;
+        else
+          count++;
+      }
+      if(count == N)
+        q = num;
+    }
+  }while (next_permutation(array, array + N));
+  printf("%d\n", abs(p - q));
 }
 
 int main(){
@@ -47,18 +76,14 @@ int main(){
 
   long long N;
   std::scanf("%lld", &N);
-  long long M;
-  std::scanf("%lld", &M);
-  long long P;
-  std::scanf("%lld", &P);
-  std::vector<long long> A(M);
-  std::vector<long long> B(M);
-  std::vector<long long> C(M);
-  for(int i = 0 ; i < M ; i++){
-    std::scanf("%lld", &A[i]);
-    std::scanf("%lld", &B[i]);
-    std::scanf("%lld", &C[i]);
+  std::vector<long long> P(N);
+  for(int i = 0 ; i < N ; i++){
+    std::scanf("%lld", &P[i]);
   }
-  func(N, M, P, std::move(A), std::move(B), std::move(C));
+  std::vector<long long> Q(N);
+  for(int i = 0 ; i < N ; i++){
+    std::scanf("%lld", &Q[i]);
+  }
+  func(N, std::move(P), std::move(Q));
   return 0;
 }
